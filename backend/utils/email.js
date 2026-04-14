@@ -5,8 +5,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const sendBookingConfirmation = async (email, booking, bike, user) => {
   try {
     await resend.emails.send({
-      from: 'Jolly Cabs <onboarding@resend.dev>',
-      to: [email, 'kalibro971@gmail.com'],
+      from: 'onboarding@resend.dev',
+      to: ['kalibro971@gmail.com'],
       subject: `Booking Confirmed - ${booking.bookingId}`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;background:#0f172a;color:#fff;border-radius:12px;overflow:hidden;">
@@ -16,6 +16,7 @@ const sendBookingConfirmation = async (email, booking, bike, user) => {
           </div>
           <div style="padding:30px;">
             <p>Hi <strong>${user.name}</strong>, your booking is confirmed!</p>
+            <p><strong>User Email:</strong> ${email}</p>
             <div style="background:#1e293b;border-radius:8px;padding:20px;margin:20px 0;">
               <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
               <p><strong>Bike:</strong> ${bike.name}</p>
@@ -31,7 +32,7 @@ const sendBookingConfirmation = async (email, booking, bike, user) => {
         </div>
       `,
     });
-    console.log('Email sent successfully!');
+    console.log('Email sent successfully to kalibro971@gmail.com!');
   } catch (err) {
     console.error('Email error:', err.message);
   }
