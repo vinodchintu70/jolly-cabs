@@ -1,22 +1,10 @@
 const router = require('express').Router();
-const Razorpay = require('razorpay');
 const Booking = require('../models/Booking');
 const { protect } = require('../middleware/auth');
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
-
 router.post('/create-order', protect, async (req, res) => {
   try {
-    const { amount } = req.body;
-    const order = await razorpay.orders.create({
-      amount: amount * 100,
-      currency: 'INR',
-      receipt: 'jc_' + Date.now(),
-    });
-    res.json({ orderId: order.id, amount: order.amount, currency: order.currency, key: process.env.RAZORPAY_KEY_ID });
+    res.json({ orderId: 'free_order_' + Date.now(), amount: req.body.amount * 100, currency: 'INR', key: 'test' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
