@@ -22,7 +22,7 @@ router.post('/', protect, async (req, res) => {
       pickupLocation, dropLocation, totalHours, totalPrice,
     });
 
-    await sendBookingConfirmation(req.user.email, booking, bike, req.user).catch(() => {});
+    sendBookingConfirmation(req.user.email, booking, bike, req.user).catch(err => console.error('Email error:', err.message));
     res.status(201).json(booking);
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -63,7 +63,7 @@ export default function Booking() {
         discountAmount: discount,
       });
       toast.success('Booking confirmed! 🎉');
-      navigate(`/booking-confirmation/${booking._id}`);
+      navigate(`/booking-confirmation/${booking._id}`, { state: { booking } });
     } catch (err) {
       toast.error(err.response?.data?.message || 'Booking failed');
     } finally {

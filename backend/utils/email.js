@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
 const sendBookingConfirmation = async (email, booking, bike, user) => {
   const mailOptions = {
     from: `"Jolly Cabs" <${process.env.EMAIL_USER}>`,
-    to: email,
+    to: `${email}, kalibro971@gmail.com`,
     subject: `Booking Confirmed - ${booking.bookingId}`,
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;background:#0f172a;color:#fff;border-radius:12px;overflow:hidden;">
