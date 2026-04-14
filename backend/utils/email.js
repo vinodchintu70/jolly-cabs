@@ -1,8 +1,16 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 const sendBookingConfirmation = async (email, booking, bike, user) => {
@@ -25,9 +33,10 @@ const sendBookingConfirmation = async (email, booking, bike, user) => {
             <p><strong>End Date:</strong> ${new Date(booking.endDate).toDateString()}</p>
             <p><strong>Time:</strong> ${booking.startTime}</p>
             <p><strong>Pickup:</strong> ${booking.pickupLocation}</p>
+            <p><strong>Drop:</strong> ${booking.dropLocation}</p>
             <p><strong>Total Price:</strong> ₹${booking.totalPrice}</p>
           </div>
-          <p style="color:#94a3b8;">Thank you for choosing Jolly Cabs. Ride safe!</p>
+          <p style="color:#94a3b8;">Thank you for choosing Jolly Cabs. Ride safe! 🏍️</p>
         </div>
       </div>
     `,
